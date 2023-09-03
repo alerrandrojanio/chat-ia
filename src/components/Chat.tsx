@@ -14,11 +14,18 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "./ui/scroll-area";
+import { Message } from "./Message";
+import { ChatAvatar } from "./ChatAvatar";
+import { twMerge } from "tailwind-merge";
+import { useState } from "react";
+import clsx from "clsx";
 
 export function Chat() {
   const { messages, input, handleInputChange, handleSubmit } = useChat({
     api: "api/chat",
   });
+
+  const [classN, setClassN] = useState("");
 
   return (
     <Card className="w-[450px]">
@@ -34,28 +41,12 @@ export function Chat() {
             return (
               <div
                 key={message.id}
-                className="flex gap-3 py-1.5 text-sm text-slate-200"
+                className={clsx("flex gap-3 py-1.5 text-sm text-slate-200", {
+                  "flex-row-reverse": message.role === "user",
+                })}
               >
-                <Avatar>
-                  {message.role === "user" ? (
-                    <>
-                      <AvatarFallback>AJ</AvatarFallback>
-                      <AvatarImage src="https://github.com/alerrandrojanio.png" />
-                    </>
-                  ) : (
-                    <>
-                      <AvatarFallback>R2</AvatarFallback>
-                      <AvatarImage src="/r2.jpg" />
-                    </>
-                  )}
-                </Avatar>
-
-                <p className="leading-relaxed">
-                  <span className="block font-bold text-slate-50">
-                    {message.role === "user" ? "Alerrandro:" : "R2D2:"}
-                  </span>
-                  {message.content}
-                </p>
+                <ChatAvatar role={message.role} />
+                <Message role={message.role} content={message.content} />
               </div>
             );
           })}
