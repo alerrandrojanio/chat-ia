@@ -1,5 +1,4 @@
 import { Chat } from "@/components/Chat";
-import { DarkModeSwitch } from "@/components/DarkModeSwitch";
 
 export default function Home() {
   return (
