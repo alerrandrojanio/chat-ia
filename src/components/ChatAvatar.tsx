@@ -10,7 +10,10 @@ export function ChatAvatar({ role }: ChatAvatarProps) {
       {role === "user" ? (
         <>
           <AvatarFallback>AJ</AvatarFallback>
-          <AvatarImage src="https://github.com/alerrandrojanio.png" />
+          <AvatarImage
+            src="https://github.com/alerrandrojanio.png"
+            className=""
+          />
         </>
       ) : (
         <>
